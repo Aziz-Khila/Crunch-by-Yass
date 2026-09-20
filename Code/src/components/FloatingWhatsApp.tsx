@@ -8,7 +8,7 @@ export default function FloatingWhatsApp() {
       href={buildWhatsAppUrl("Bonjour, j'aimerais passer une commande.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl ring-4 ring-ivory transition-all hover:scale-110 hover:bg-[#20bd5a] md:bottom-8 md:right-8"
+      className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl ring-4 ring-cream-light transition-all hover:scale-110 hover:bg-[#20bd5a] md:bottom-8 md:right-8"
       aria-label="Contacter via WhatsApp"
     >
       <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

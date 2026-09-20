@@ -47,8 +47,3 @@ export const siteConfig = {
   ],
 };
 
-// Future ideas (out of scope for v1):
-// - Online payment integration
-// - Order tracking / admin dashboard
-// - CMS integration for self-editing products
-// - Multi-language toggle (French / Arabic)

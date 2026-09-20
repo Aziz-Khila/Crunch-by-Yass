@@ -1,17 +1,18 @@
 # Crunch by Yass — Pâtisserie Showcase
 
-Site vitrine pour une pâtisserie artisanale à domicile. Catalogue statique avec commandes via WhatsApp.
+Site vitrine pour une pâtisserie artisanale. Catalogue statique avec commandes via WhatsApp.
 
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript
 - Tailwind CSS 4
-- Framer Motion
+- Framer Motion + Anime.js
 - Déployable sur Vercel
 
 ## Démarrage
 
 ```bash
+cd Code
 npm install
 npm run dev
 ```
@@ -22,11 +23,11 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 
 ### Produits
 
-Éditez `src/data/products.ts` pour ajouter, modifier ou supprimer des produits.
+Éditez `Code/src/data/products.ts` pour ajouter, modifier ou supprimer des produits.
 
 ### Infos du site
 
-Éditez `src/data/site.ts` :
+Éditez `Code/src/data/site.ts` :
 
 - Numéro WhatsApp (`whatsappNumber` — format : `216XXXXXXXX`, sans + ni espaces)
 - Téléphone, email, réseaux sociaux
@@ -34,12 +35,12 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 
 ### Images
 
-- Logo : remplacez `public/logo.png`
-- Photos produits : ajoutez vos images dans `public/images/` et mettez à jour les chemins dans `products.ts`
+- Logo : remplacez `Code/public/logo.png`
+- Photos produits : ajoutez vos images dans `Code/public/images/` et mettez à jour les chemins dans `products.ts`
 
 ### Couleurs & polices
 
-Palette chaude définie dans `src/app/globals.css` (cream, blush, warm-brown, gold).
+Palette cream / orange / ink définie dans `Code/src/app/globals.css`.
 
 ## Pages
 
@@ -53,14 +54,8 @@ Palette chaude définie dans `src/app/globals.css` (cream, blush, warm-brown, go
 ## Déploiement
 
 ```bash
+cd Code
 npm run build
 ```
 
-Puis déployez sur [Vercel](https://vercel.com) — connectez le repo et c'est prêt.
-
-## Hors scope (v1)
-
-- Paiement en ligne
-- Suivi de commandes / dashboard admin
-- CMS pour édition autonome des produits
-- Toggle multilingue (FR / AR)
+Puis déployez sur [Vercel](https://vercel.com) — racine du projet : dossier `Code`.

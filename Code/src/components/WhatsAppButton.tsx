@@ -20,14 +20,14 @@ export default function WhatsAppButton({
   fullWidth = false,
 }: WhatsAppButtonProps) {
   const sizeClasses = {
-    sm: "px-4 py-2 text-xs",
-    md: "px-6 py-3 text-sm",
-    lg: "px-8 py-4 text-sm",
+    sm: "min-h-10 px-4 py-2.5 text-sm",
+    md: "min-h-11 px-6 py-3 text-sm",
+    lg: "min-h-12 px-8 py-4 text-sm",
   };
 
   const variantClasses = {
-    primary: "bg-ink text-ivory hover:bg-accent",
-    ghost: "bg-transparent text-ink ring-1 ring-stone-dark hover:ring-accent hover:text-accent",
+    primary: "bg-ink text-white hover:bg-accent rounded-md",
+    ghost: "bg-transparent text-ink ring-1 ring-cream-dark hover:ring-accent hover:text-accent",
     light: "bg-white/15 text-white backdrop-blur-sm hover:bg-white/25",
     whatsapp: "bg-[#25D366] text-white hover:bg-[#20bd5a]",
   };

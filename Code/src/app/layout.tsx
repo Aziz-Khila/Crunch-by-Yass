@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,6 +20,12 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: {
     default: `${siteConfig.name} — Pâtisserie Artisanale`,
@@ -37,7 +43,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "/images/hero.jpg",
+        url: "/images/hero-cheesecake.png",
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} — Gâteaux artisanaux`,
@@ -48,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} — Pâtisserie Artisanale`,
     description: siteConfig.description,
-    images: ["/images/hero.jpg"],
+    images: ["/images/hero-cheesecake.png"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -58,9 +64,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${cormorant.variable} ${dmSans.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen bg-ivory antialiased" suppressHydrationWarning>
+      <body className="min-h-screen bg-cream-light antialiased" suppressHydrationWarning>
         <Header />
-        <main>{children}</main>
+        <main className="pb-20 md:pb-0">{children}</main>
         <Footer />
         <FloatingWhatsApp />
       </body>

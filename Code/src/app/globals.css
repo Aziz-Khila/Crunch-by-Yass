@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ivory: #fafaf8;
-  --color-stone: #f3f0eb;
-  --color-stone-dark: #e8e4dc;
-  --color-ink: #1a1512;
-  --color-ink-muted: #6b6560;
-  --color-ink-faint: #9c9690;
-  --color-accent: #d4847a;
-  --color-accent-dark: #b86b61;
-  --color-accent-soft: #f9ebe9;
+  --color-cream: #f7ecdf;
+  --color-cream-light: #fbf6ef;
+  --color-cream-dark: #ead9c4;
+  --color-ink: #2d1e12;
+  --color-ink-muted: #6b5344;
+  --color-ink-faint: #a08b78;
+  --color-accent: #e88d4d;
+  --color-accent-dark: #d4783a;
+  --color-accent-soft: #fce8d8;
+  --color-white: #ffffff;
 
   --font-family-display: var(--font-cormorant), Georgia, serif;
   --font-family-body: var(--font-dm-sans), system-ui, sans-serif;
@@ -17,14 +18,44 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-cream-dark);
 }
 
 body {
-  background-color: var(--color-ivory);
+  background-color: var(--color-cream-light);
   color: var(--color-ink);
   font-family: var(--font-family-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
+
+/* Themed scrollbar — WebKit (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-cream);
+  border-left: 1px solid var(--color-cream-dark);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f0a06a 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
+  border-radius: 999px;
+  border: 2px solid var(--color-cream);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--color-cream);
+}
+
 
 ::selection {
   background-color: var(--color-accent-soft);
@@ -36,38 +67,3 @@ body {
   outline-offset: 3px;
 }
 
-/* Editorial utilities */
-.text-balance {
-  text-wrap: balance;
-}
-
-.grain {
-  position: relative;
-}
-
-.grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.image-reveal {
-  clip-path: inset(0 round 1.5rem);
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}

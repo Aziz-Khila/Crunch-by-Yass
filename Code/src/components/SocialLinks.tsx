@@ -7,8 +7,8 @@ type SocialLinksProps = {
 export default function SocialLinks({ variant = "default" }: SocialLinksProps) {
   const iconClass =
     variant === "dark"
-      ? "flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white transition-all hover:border-accent hover:bg-accent hover:text-white"
-      : "flex h-11 w-11 items-center justify-center rounded-full border border-stone-dark text-ink-muted transition-all hover:border-accent hover:text-accent";
+      ? "flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-all hover:border-accent hover:bg-accent"
+      : "flex h-11 w-11 items-center justify-center rounded-full border border-cream-dark text-ink-muted transition-all hover:border-accent hover:bg-accent hover:text-white";
 
   return (
     <div className="flex gap-3" aria-label="Réseaux sociaux">
