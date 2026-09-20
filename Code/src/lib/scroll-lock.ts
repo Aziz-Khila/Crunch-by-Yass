@@ -1,16 +1,21 @@
 /** Lock body scroll without layout shift when the scrollbar disappears. */
 export function lockBodyScroll() {
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
   const { body } = document;
-  const html = document.documentElement;
+  if (body.dataset.scrollLocked === "true") return;
+
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  const scrollY = window.scrollY;
 
   body.dataset.scrollLocked = "true";
-  body.style.overflow = "hidden";
-  html.style.overflow = "hidden";
+  body.dataset.scrollY = String(scrollY);
+  body.style.position = "fixed";
+  body.style.top = `-${scrollY}px`;
+  body.style.left = "0";
+  body.style.right = "0";
+  body.style.width = "100%";
 
   if (scrollbarWidth > 0) {
     body.style.paddingRight = `${scrollbarWidth}px`;
-    // Keep sticky header aligned too
     document.querySelectorAll<HTMLElement>("[data-scroll-lock-compensate]").forEach((el) => {
       el.style.paddingRight = `${scrollbarWidth}px`;
     });
@@ -19,14 +24,22 @@ export function lockBodyScroll() {
 
 export function unlockBodyScroll() {
   const { body } = document;
-  const html = document.documentElement;
+  if (body.dataset.scrollLocked !== "true") return;
 
-  body.style.overflow = "";
-  html.style.overflow = "";
+  const scrollY = Number(body.dataset.scrollY || "0");
+
+  body.style.position = "";
+  body.style.top = "";
+  body.style.left = "";
+  body.style.right = "";
+  body.style.width = "";
   body.style.paddingRight = "";
   delete body.dataset.scrollLocked;
+  delete body.dataset.scrollY;
 
   document.querySelectorAll<HTMLElement>("[data-scroll-lock-compensate]").forEach((el) => {
     el.style.paddingRight = "";
   });
+
+  window.scrollTo(0, scrollY);
 }

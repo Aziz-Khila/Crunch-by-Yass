@@ -3,9 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { siteConfig } from "@/data/site";
-import { lockBodyScroll, unlockBodyScroll } from "@/lib/scroll-lock";
 
 const navLinks = [
   { href: "/", label: "Accueil" },
@@ -17,6 +16,7 @@ const navLinks = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const menuId = useId();
 
   useEffect(() => {
     setMenuOpen(false);
@@ -29,14 +29,11 @@ export default function Header() {
       if (e.key === "Escape") setMenuOpen(false);
     };
 
-    lockBodyScroll();
     document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      unlockBodyScroll();
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header
@@ -47,7 +44,7 @@ export default function Header() {
         <Link
           href="/"
           className="group flex min-w-0 shrink items-center gap-2 sm:gap-2.5"
-          onClick={() => setMenuOpen(false)}
+          onClick={closeMenu}
         >
           <Image
             src="/logo.png"
@@ -95,43 +92,41 @@ export default function Header() {
           className="flex h-11 w-11 shrink-0 items-center justify-center text-ink lg:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
+          aria-controls={menuId}
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
-          <span className="relative h-3.5 w-5">
+          <span className="relative h-3.5 w-5" aria-hidden="true">
             <span
-              className={`absolute left-0 h-0.5 w-full rounded bg-ink transition-all ${menuOpen ? "top-1.5 rotate-45" : "top-0"}`}
+              className={`absolute left-0 h-0.5 w-full rounded bg-ink transition-transform duration-200 ${menuOpen ? "top-1.5 rotate-45" : "top-0"}`}
             />
             <span
-              className={`absolute left-0 top-1.5 h-0.5 w-full rounded bg-ink transition-all ${menuOpen ? "opacity-0" : ""}`}
+              className={`absolute left-0 top-1.5 h-0.5 w-full rounded bg-ink transition-opacity duration-200 ${menuOpen ? "opacity-0" : "opacity-100"}`}
             />
             <span
-              className={`absolute left-0 h-0.5 w-full rounded bg-ink transition-all ${menuOpen ? "top-1.5 -rotate-45" : "top-3"}`}
+              className={`absolute left-0 h-0.5 w-full rounded bg-ink transition-transform duration-200 ${menuOpen ? "top-1.5 -rotate-45" : "top-3"}`}
             />
           </span>
         </button>
       </div>
 
       <div
-        id="mobile-menu"
-        className={`overflow-hidden border-t border-cream-dark/50 bg-cream-light transition-all duration-300 lg:hidden ${
+        id={menuId}
+        className={`border-t bg-cream-light lg:hidden ${
           menuOpen
-            ? "max-h-[min(24rem,calc(100dvh-4.5rem))] opacity-100"
-            : "max-h-0 border-transparent opacity-0"
+            ? "pointer-events-auto border-cream-dark/50"
+            : "pointer-events-none border-transparent"
         }`}
+        hidden={!menuOpen}
         aria-hidden={!menuOpen}
       >
-        <nav
-          className="max-h-[min(24rem,calc(100dvh-4.5rem))] overflow-y-auto px-5 py-4"
-          aria-label="Navigation mobile"
-        >
+        <nav className="px-5 py-4" aria-label="Navigation mobile">
           <ul className="flex flex-col">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="block border-b border-cream-dark/40 py-3.5 text-base font-medium text-ink"
-                  onClick={() => setMenuOpen(false)}
+                  className="block border-b border-cream-dark/40 py-3.5 text-base font-medium text-ink active:text-accent"
+                  onClick={closeMenu}
                 >
                   {link.label}
                 </Link>
@@ -140,8 +135,8 @@ export default function Header() {
             <li className="pt-4">
               <Link
                 href="/menu"
-                className="block rounded-md bg-accent py-3.5 text-center text-sm font-semibold text-white"
-                onClick={() => setMenuOpen(false)}
+                className="block rounded-md bg-accent py-3.5 text-center text-sm font-semibold text-white active:bg-accent-dark"
+                onClick={closeMenu}
               >
                 Commander
               </Link>
